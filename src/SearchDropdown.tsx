@@ -145,7 +145,7 @@ class SearchDropdown extends React.Component<
 
   _rowRenderer = ({ index, key }: { index: number; key: any }) => {
     return (
-      <div>
+      <div key={key}>
         <MenuItem
           onClick={(event: any) =>
             this.handleMenuItemClick(this.props.data[index], key, event)
