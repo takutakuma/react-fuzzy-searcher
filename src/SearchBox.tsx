@@ -4,6 +4,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles, Theme, createStyles, WithStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import * as Fuse from "fuse.js";
+import { debounce } from "lodash-es";
 import SearchDropdown from "./SearchDropdown";
 import { ISearchResultOptions } from "./SearchResult";
 // var colors = require("./Common.scss");
@@ -83,6 +84,7 @@ class SearchBox extends React.Component<ISearchBoxProps<any>, ISearchBoxState> {
             showDropdown: false,
             searchResults: []
         };
+        this.performFuseSearch = debounce(this.performFuseSearch.bind(this), 300);
     }
 
     public render() {
@@ -92,7 +94,7 @@ class SearchBox extends React.Component<ISearchBoxProps<any>, ISearchBoxState> {
             <div className={classes.root}>
                 <div className={classes.search} ref={node => this.anchorEl = node}>
                     <div className={classes.searchIcon}>
-                        <SearchIcon 
+                        <SearchIcon
                         color="default" />
                     </div>
                     <InputBase
